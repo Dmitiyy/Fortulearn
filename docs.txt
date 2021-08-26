@@ -1,0 +1,14 @@
+const {state, dispatch} = useAppContext();
+
+dispatch({type: Actions.Click, payload: {}});
+
+<AnimatedButton 
+  initialColor='#1916A4'
+  hoverColor='#fff'
+  textColor='white'
+  text='See more'
+  textHover='#1916A4'
+  textSize="20px"
+  width="200px"
+  height="60px"
+/>
