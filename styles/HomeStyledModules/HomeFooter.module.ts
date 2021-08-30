@@ -8,6 +8,15 @@ export const FooterBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1320px) and (min-width: 300px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media (max-width: 700px) and (min-width: 300px) {
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 `;
 
 export const FooterContainer = styled.div`
@@ -30,6 +39,17 @@ export const FooterContainer = styled.div`
       margin-top: 0px;
       font-weight: bold;
       cursor: default;
+    }
+  }
+  @media (max-width: 1320px) and (min-width: 300px) {
+    width: 100%;
+  }
+  @media (max-width: 700px) and (min-width: 300px) {
+    flex-direction: column;
+    align-items: center;
+    ul {
+      margin-top: 40px;
+      width: 153px;
     }
   }
 `;

@@ -29,7 +29,7 @@ export const You = () => {
             />
           </YouCardContainer>
         </YouCard>
-        <YouCard blockColor='#1B1AA6' textColor='#fff'>
+        <YouCard blockColor='#1B1AA6' textColor='#fff' className="you-card-second">
           <Image src={Second} alt='you_photo' />
           <YouCardContainer>
             <h2>Student</h2>

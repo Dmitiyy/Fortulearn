@@ -14,6 +14,13 @@ export const AboutBlock = styled.div`
     font-size: 20px;
     margin-top: 10px;
   }
+  @media (max-width: 1320px) and (min-width: 300px) {
+    padding-left: 20px;
+    padding-right: 20px;
+    p {
+      text-align: center;
+    }
+  } 
 `;
 
 export const AboutContainer = styled.div`
@@ -35,6 +42,25 @@ export const AboutContainer = styled.div`
   }
   img {
     width: 450px;
+  }
+  @media (max-width: 1320px) and (min-width: 300px) {
+    width: 100%;
+  }
+  @media (max-width: 1000px) and (min-width: 320px) {
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    div {
+      display: none !important;
+    }
+    p {
+      width: 100%;
+      font-size: 20px;
+      margin-top: 0px;
+      margin-left: 0px;
+      text-align: left;
+    }
   }
 `;
 

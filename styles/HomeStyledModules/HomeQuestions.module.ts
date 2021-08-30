@@ -14,12 +14,24 @@ export const QuestionsBlock = styled.div`
     font-size: 20px;
     margin-top: 10px;
   }
+  @media (max-width: 1320px) and (min-width: 300px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 export const QuestionsContainer = styled.div`
   width: 1000px;
   margin-top: 50px;
   display: flex;
+  @media (max-width: 1320px) and (min-width: 300px) {
+    width: 100%;
+  }
+  @media (max-width: 700px) and (min-width: 300px) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 `;
 
 export const QuestionsWrapItems = styled.ul`
@@ -35,6 +47,13 @@ export const QuestionsWrapItems = styled.ul`
     padding-left: 20px;
     border-radius: 13px 0 0 13px;
   }
+  @media (max-width: 700px) and (min-width: 300px) {
+    width: 280px;
+    padding-right: 20px;
+    li {
+      border-radius: 13px;
+    }
+  }
 `;
 
 export const QuestionsWrapDescription = styled.div`
@@ -47,5 +66,10 @@ export const QuestionsWrapDescription = styled.div`
     line-height: 40px;
     color: #fff;
     font-size: 20px;
+  }
+  @media (max-width: 700px) and (min-width: 300px) {
+    margin-top: 10px;
+    width: 280px;
+    border-radius: 13px;
   }
 `;
