@@ -6,7 +6,7 @@ import {
   SignUpForm, 
   SignUpWrapBtns, 
   SignUpWrapForm
-} from "../styles/SignUpModules/SignUp.module";
+} from "../styles/SignUpStyledModules/SignUp.module";
 import StudentWhite from '../images/icon_student_white.png';
 import StudentBlack from '../images/icon_student_black.png';
 import TeacherWhite from '../images/icon_teacher_white.png';

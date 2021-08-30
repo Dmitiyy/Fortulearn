@@ -5,6 +5,7 @@ import PhotoF from '../../images/header_1.png';
 import PhotoS from '../../images/header_2.png';
 import PhotoT from '../../images/header_3.png';
 import PhotoFo from '../../images/header_4.png';
+import Link from 'next/link';
 
 export const Header = () => {
   return (
@@ -26,7 +27,11 @@ export const Header = () => {
               width="270px"
               height="55px"
             />
-            <HeaderSignUpBtn>Sign up</HeaderSignUpBtn>
+            <Link href='/signup' passHref>
+              <a>
+                <HeaderSignUpBtn>Sign up</HeaderSignUpBtn>
+              </a>
+            </Link>
           </HeaderWrapBtns>
         </HeaderWrapText>
         <HeaderWrapImages>

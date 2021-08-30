@@ -6,10 +6,12 @@ import { Nav } from "../components/Home/Nav";
 import { Questions } from "../components/Home/Questions";
 import { You } from "../components/Home/You";
 
+import Logo from '../images/logoNav.png';
+
 export default function Home() {
   return (
     <Fragment>
-      <Nav />
+      <Nav background={true} logo={Logo} />
       <Header />
       <About />
       <You />

@@ -20,6 +20,9 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  div {
+    cursor: pointer;
+  }
   @media (max-width: 1320px) and (min-width: 300px) {
     width: 100%;
   }

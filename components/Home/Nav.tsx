@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { 
+  gradient,
   NavBlock, 
   NavBtnLogIn, 
   NavBurgerMenu, 
@@ -8,29 +9,43 @@ import {
   NavContainer, 
   NavWrapBtns, 
   NavWrapText 
-} from '../../styles/HomeStyledModules/HomeNav.module'
-import Logo from '../../images/logoNav.png';
+} from '../../styles/HomeStyledModules/HomeNav.module';
 import { AnimatedButton } from '../AnimatedButton';
 import { useState } from 'react';
 import Link from 'next/link';
 
-export const Nav = () => {
+interface INavProps {
+  logo: StaticImageData
+  background: Boolean
+}
+
+export const Nav = ({logo, background}: INavProps) => {
   const [openMenu, setOpenMenu] = useState<Boolean>(false);
 
   const openBurgerMenu = () => setOpenMenu(!openMenu);
 
   return (
     <>
-      <NavBlock>
+      <NavBlock style={{background: background ? gradient : 'transparent'}}>
         <NavContainer>
-          <Image src={Logo} alt='logo' className="nav-logo" />
-          <NavWrapText>
+          <Link href='/' passHref>
+            <a>
+              <Image src={logo} alt='logo' className="nav-logo" />
+            </a>
+          </Link>
+          <NavWrapText style={{color: background ? '#fff' : '#000'}}>
             <li>Rules</li>
-            <li>Courses</li>
+            <Link href='/courses' passHref>
+              <li>Courses</li>
+            </Link>
             <li>Authors</li>
           </NavWrapText>
           <NavWrapBtns>
-            <NavBtnLogIn>Log in</NavBtnLogIn>
+            <Link href='/login'>
+              <a>
+                <NavBtnLogIn style={{color: background ? '#fff' : '#000'}}>Log in</NavBtnLogIn>
+              </a>
+            </Link>
             <Link href='/signup' passHref>
               <a>
                 <AnimatedButton
