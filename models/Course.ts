@@ -32,6 +32,13 @@ const courseSchema = new Schema({
   schedule: {
     type: Array,
     default: []
+  },
+  type: {
+    type: String,
+    enum: {
+      values: ['business', 'development', 'finance', 'music']
+    },
+    required: [true, 'Course must have a type']
   }
 });
 

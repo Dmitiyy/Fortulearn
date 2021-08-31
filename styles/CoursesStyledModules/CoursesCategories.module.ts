@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Bg from '../../images/categoires_test.png';
 
 export const CategoriesBlock = styled.div`
   width: 1300px;
@@ -67,5 +68,91 @@ export const CategoriesWrap = styled.div`
       font-size: 23px;
       font-weight: bold;
     }
+  }
+`;
+
+export const CategoriesCourseContent = styled.div`
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 25px;
+  opacity: 0;
+  transition: all 0.3s;
+  p {
+    margin-bottom: 30px;
+  }
+`;
+
+export const CategoriesCourse = styled.div`
+  width: 200px;
+  height: 200px;
+  background: url(${Bg.src});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  border-radius: 13px;
+  transition: all 0.3s;
+  &:hover ${CategoriesCourseContent} {
+    opacity: 1;
+  }
+`;
+
+export const CategoriesCourseWrap = styled.div`
+  width: 1100px !important;
+  display: flex !important;
+  justify-content: space-around !important;
+`;
+
+export const CategoriesSliderWrap = styled.div`
+  width: 1300px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 50px;
+`;
+
+export const CategoriesSliderRightArrow = styled.div`
+  width: 70px;  
+  height: 70px;
+  background: #6EC1F6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  cursor: pointer;
+  div {
+    width: 20px !important;
+    height: 30px !important;
+  }
+`;
+
+export const CategoriesSliderLeftArrow = styled.div`
+  width: 70px;
+  height: 70px;
+  background: #6EC1F6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  cursor: pointer;
+  div {
+    transform: rotate(180deg);
+    width: 20px !important;
+    height: 30px !important;
   }
 `;
