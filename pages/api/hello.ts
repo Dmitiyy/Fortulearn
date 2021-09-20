@@ -7,7 +7,7 @@ type Data = {
   data: Object
 }
 
-const {Course} = mongoose.models; 
+const {Course, Student} = mongoose.models; 
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,22 +16,8 @@ export default async function handler(
   try {
     await connectToDatabase();
   
-    const data = {
-      photo: 'test',
-      name: 'test',
-      description: 'test',
-      participants: [0, 4],
-      price: 7,
-      author: 'test author',
-      people: [
-        {photo: 'test', name: 'test'},
-        {photo: 'test', name: 'test'}
-      ],
-      schedule: [['Monday', '9am'], ['Sunday', '10pm']]
-    }
-  
-    const course: Object = await Course.create(data);
+    const students = await Student.find();
     
-    res.status(200).json({ status: 'success', data: course});
+    res.status(200).json({ status: 'success', data: students});
   } catch (err) {console.log(err)}
 }

@@ -3,7 +3,13 @@ import Link from 'next/link'
 import { FooterBlock, FooterContainer } from "../../styles/HomeStyledModules/HomeFooter.module"
 import Logo from '../../images/logoFooter.png'
 
-export const Footer = () => {
+export interface IFooter {
+  about: string;
+  you: string;
+  questions: string;
+}
+
+export const Footer = ({about, you, questions}: IFooter) => {
   return (
     <FooterBlock>
       <FooterContainer>
@@ -12,9 +18,9 @@ export const Footer = () => {
         </div>
         <ul>
           <li>Blocks:</li>
-          <Link href='#about' passHref><li>About the project</li></Link>
-          <Link href='#you' passHref><li>Who are you?</li></Link>
-          <Link href='#questions' passHref><li>Questions</li></Link>
+          <Link href={about} passHref><li>About the project</li></Link>
+          <Link href={you} passHref><li>Who are you?</li></Link>
+          <Link href={questions} passHref><li>Questions</li></Link>
         </ul>
         <ul>
           <li>Pages:</li>

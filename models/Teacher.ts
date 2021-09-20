@@ -16,11 +16,11 @@ const teacherSchema = new Schema({
   },
   description: {
     type: String,
-    required: [true, 'Teacher must have a description']
+    default: '',
   },
   status: {
     type: String,
-    required: [true, 'Teacher must have a status']
+    default: '',
   },
   name: {
     type: String,
@@ -53,3 +53,4 @@ const teacherSchema = new Schema({
 });
 
 const Teacher = model('Teacher', teacherSchema);
+export default Teacher;

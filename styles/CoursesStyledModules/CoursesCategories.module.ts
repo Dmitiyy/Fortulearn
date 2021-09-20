@@ -156,3 +156,25 @@ export const CategoriesSliderLeftArrow = styled.div`
     height: 30px !important;
   }
 `;
+
+export const CategoriesPug = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 50px;
+`;
+
+export const CategoriesPugItem = styled.div`
+  width: 45px;
+  height: 45px;
+  border-radius: 13px;
+  background: #fff;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+`;

@@ -49,3 +49,4 @@ const studentSchema = new Schema({
 });
 
 const Student = model('Student', studentSchema);
+export default Student;
