@@ -14,6 +14,7 @@ const initialState: TState = {
 export const userReducer = (state = initialState, action: IAction): TState => {
   switch (action.type) {
     case 'SAY_HELLO':
+      console.log('say hello reducer function here');
       return {...state, name: `Hello, ${state.name}`};
     default:
       return {...state};
