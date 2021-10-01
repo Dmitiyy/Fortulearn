@@ -12,7 +12,13 @@ import {
   CoursesContentBlock, 
   CoursesContentPhoto,
   CoursesContentText,
-  CoursesContentWrap
+  CoursesContentWrap,
+  CoursesContentParticipants,
+  CoursesParticipantsWrap,
+  CoursesParticipantsItem,
+  CoursesParticipantsInner,
+  CoursesContentSchedule,
+  CoursesContentJoin
 } from '../../styles/CoursesStyledModules/CoursesContent.module';
 import Preview from '../../images/courses_content.png';
 import { AnimatedButton } from "../../components/AnimatedButton";
@@ -64,6 +70,95 @@ export default function Courses() {
           />
         </CoursesAuthorWrap>
       </CoursesContentAuthor>
+      <CoursesContentParticipants>
+        <h2>Participants</h2>
+        <CoursesParticipantsWrap>
+          <CoursesParticipantsItem>
+            <CoursesParticipantsInner>
+              <h3>Karl Fredrickson</h3>
+            </CoursesParticipantsInner>
+          </CoursesParticipantsItem>
+          <CoursesParticipantsItem>
+            <CoursesParticipantsInner>
+              <h3>Karl Fredrickson</h3>
+            </CoursesParticipantsInner>
+          </CoursesParticipantsItem>
+          <CoursesParticipantsItem>
+            <CoursesParticipantsInner>
+              <h3>Karl Fredrickson</h3>
+            </CoursesParticipantsInner>
+          </CoursesParticipantsItem>
+          <CoursesParticipantsItem>
+            <CoursesParticipantsInner>
+              <h3>Karl Fredrickson</h3>
+            </CoursesParticipantsInner>
+          </CoursesParticipantsItem>
+          <CoursesParticipantsItem>
+            <CoursesParticipantsInner>
+              <h3>Karl Fredrickson</h3>
+            </CoursesParticipantsInner>
+          </CoursesParticipantsItem>
+          <CoursesParticipantsItem>
+            <CoursesParticipantsInner>
+              <h3>Karl Fredrickson</h3>
+            </CoursesParticipantsInner>
+          </CoursesParticipantsItem>
+          <CoursesParticipantsItem>
+            <CoursesParticipantsInner>
+              <h3>Karl Fredrickson</h3>
+            </CoursesParticipantsInner>
+          </CoursesParticipantsItem>
+        </CoursesParticipantsWrap>
+      </CoursesContentParticipants>
+      <CoursesContentSchedule>
+        <h2>Schedule</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Sunday</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>9am</td>
+              <td>5pm</td>
+              <td>8pm</td>
+              <td>9am</td>
+              <td>5pm</td>
+              <td>8pm</td>
+              <td>9am</td>
+            </tr>
+            <tr>
+              <td>9am</td>
+              <td>5pm</td>
+              <td>8pm</td>
+              <td>9am</td>
+              <td>5pm</td>
+              <td>8pm</td>
+              <td>9am</td>
+            </tr>
+          </tbody>
+        </table>
+      </CoursesContentSchedule>
+      <CoursesContentJoin>
+        <AnimatedButton 
+          initialColor='#1916A4'
+          hoverColor='#000000'
+          textColor='white'
+          text='Join now'
+          textHover='#fff'
+          textSize="20px"
+          width="200px"
+          height="60px"
+        />
+        <p>You can join to this conference, when it starts</p>
+      </CoursesContentJoin>
       <CourseFooter />
     </Fragment>
   )

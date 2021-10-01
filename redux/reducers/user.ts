@@ -2,7 +2,7 @@ export type TState = {
   name: string;
 };
 
-interface IAction {
+export interface IAction {
   type: string; 
   payload: Object;
 };

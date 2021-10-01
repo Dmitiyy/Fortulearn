@@ -8,10 +8,11 @@ export const CoursesFooterBlock = styled.div`
   display: flex;
   margin: 0 auto;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 60px;
   padding-left: 20px;
   padding-right: 20px;
   align-items: center;
   color: #fff;
   font-size: 20px;
+  margin-bottom: 20px;
 `; 

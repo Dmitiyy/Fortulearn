@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 import connectToDatabase from '../../utils/connectToDatabase';
 import bcrypt from 'bcrypt';
 import { getNewToken } from './signup';
-
-const {Student, Teacher} = mongoose.models; 
+import Student from '../../models/Student';
+import Teacher from '../../models/Teacher';
 
 export default async function handler(
   req: NextApiRequest,

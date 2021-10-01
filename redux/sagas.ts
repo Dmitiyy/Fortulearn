@@ -1,13 +1,26 @@
-import {all, takeEvery} from 'redux-saga/effects';
+import axios from 'axios';
+import {all, takeEvery, call} from 'redux-saga/effects';
+import { Actions } from './actions/tActions';
+import { IAction } from './reducers/user';
 
-function* helloSaga() {
-  console.log('hello, sagas');
+function* signUp(action: IAction): any {
+  try {
+    const response = yield call(() => {
+      const result = axios({
+        method: 'POST',
+        url: '/api/signup',
+        data: action.payload
+      });
+      return result;
+    });
+    console.log(response);
+  } catch (err: any) {console.log(err.message)};
 }
 
-function* helloWatcher() {
-  yield takeEvery('RUN_HELLO', helloSaga);
+function* signUpWatcher() {
+  yield takeEvery(Actions.SignUp, signUp);
 }
 
 export function* rootSaga() {
-  yield all([helloWatcher()]);
+  yield all([signUpWatcher()]);
 }

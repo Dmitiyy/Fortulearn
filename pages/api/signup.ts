@@ -2,9 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 import connectToDatabase from '../../utils/connectToDatabase';
 import bcrypt from 'bcrypt';
-import mongoose from 'mongoose';
-
-const {Student, Teacher} = mongoose.models; 
+import Student from '../../models/Student';
+import Teacher from '../../models/Teacher';
 
 export const getNewToken = (id: string) => {
   const token = jwt.sign({id}, process.env.JWT_SECRET as string, {
@@ -21,7 +20,7 @@ export default async function handler(
   if (req.method === 'POST') {
     try {
       await connectToDatabase();
-  
+      
       const {name, email, password, type} = req.body;
 
       let user: any = {};

@@ -13,6 +13,7 @@ export const CoursesNavBlock = styled.div`
   padding-right: 20px;
   align-items: center;
   img {
+    cursor: pointer;
     min-height: 50px !important;
   }
 `; 

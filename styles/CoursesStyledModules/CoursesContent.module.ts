@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import AuthorPhoto from '../../images/courses_author.png';
+import Participant from '../../images/participant.png';
 
 export const CoursesContentBlock = styled.div`
   width: 1300px;
@@ -74,7 +75,7 @@ export const CoursesAuthorWrap = styled.div`
   margin-top: 60px;
   border-radius: 13px;
   align-items: center;
-  margin-bottom: 70px;
+  margin-bottom: 90px;
 `;
 
 export const CoursesAuthorImgWrap = styled.div`
@@ -88,5 +89,77 @@ export const CoursesAuthorImgWrap = styled.div`
   h2 {
     font-size: 25px;
     margin-bottom: 10px;
+  }
+`;
+
+export const CoursesContentParticipants = styled.div`
+  width: 1015px;
+  margin: 0 auto;
+`;
+
+export const CoursesParticipantsWrap = styled.div`
+  width: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 180px);
+  grid-template-rows: auto;
+  grid-gap: 29px 29px;
+  margin-top: 30px;
+`;
+
+export const CoursesParticipantsItem = styled.div`
+  width: 180px;
+  height: 180px;
+  background: url(${Participant.src});
+  border-radius: 13px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const CoursesParticipantsInner = styled.div`
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 13px;
+  h3 {
+    opacity: 0.5;
+    color: #fff;
+  }
+`;
+
+export const CoursesContentSchedule = styled.div`
+  width: 1015px;
+  margin: 0 auto;
+  margin-top: 60px;
+  table {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    background: #6FC3F7;
+    border-collapse: collapse;
+    border-radius: 13px;
+    font-size: 20px;
+    border-style: hidden;
+  }
+  thead tr th, tbody tr td {
+    border: 3px solid #000;
+    height: 70px;
+  }
+`;
+
+export const CoursesContentJoin = styled.div`
+  width: 1015px;
+  margin: 0 auto;
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  p {
+    margin-left: 30px;
+    font-size: 20px;
   }
 `;

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 import { 
   SignUpBtnPerson, 
   SignUpContainer, 
@@ -12,6 +13,8 @@ import StudentBlack from '../images/icon_student_black.png';
 import TeacherWhite from '../images/icon_teacher_white.png';
 import TeacherBlack from '../images/icon_teacher_black.png';
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { signUpAction } from "../redux/actions/user";
 
 interface IFormikValues {
   name: string;
@@ -25,18 +28,34 @@ interface IBtnValue {
   activePhoto: StaticImageData
 }
 
+export interface ISendData {
+  name: string;
+  email: string;
+  password: string;
+  type: string;
+}
+
 export default function SignUp() {
+  const dispatch = useDispatch();
   const dataPerson: Array<string> = ['student', 'teacher'];
   const dataBtns: Array<IBtnValue> = [
     {defaultPhoto: StudentBlack, value: 'Student', activePhoto: StudentWhite},
     {defaultPhoto: TeacherBlack, value: 'Teacher', activePhoto: TeacherWhite}
   ];
   const [activePerson, setActivePerson] = useState<number>(0); 
+  const [activeType, setActiveType] = useState<string>('Student');
 
   const trigger = (selectedValue: string): void => {
+    setActiveType(selectedValue);
     selectedValue = selectedValue.toLowerCase();
     setActivePerson(dataPerson.indexOf(selectedValue));
   };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Enter your name'),
+    email: Yup.string().email().required('Enter your email'),
+    password: Yup.string().min(8, 'Must be greater than 8').required('Enter your password')
+  });
 
   return (
     <div className="signup__body">
@@ -62,22 +81,26 @@ export default function SignUp() {
           <SignUpForm>
           <Formik
             initialValues={{name: '', email: '', password: ''}}
+            validationSchema={validationSchema}
             onSubmit={(
-              values: IFormikValues,
-              { setSubmitting }: FormikHelpers<IFormikValues>
+              values: IFormikValues
             ) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 500);
+              const data: ISendData = {...values, type: activeType}; 
+              dispatch(signUpAction(data));
             }}
           >
-            <Form>
-              <Field type='text' name='name' id='name' placeholder='Name' />
-              <Field type='email' name='email' id='email' placeholder='Email' />
-              <Field type='password' name='password' id='password' placeholder='Password' />
-              <button type='submit'>Submit</button>
-            </Form>
+            {({errors}) => (
+              <Form>
+                <Field type='text' name='name' id='name' placeholder='Name' />
+                <p>{errors.name}</p>
+                <Field type='email' name='email' id='email' placeholder='Email' />
+                <p>{errors.email}</p>
+                <Field type='password' name='password' id='password' 
+                placeholder='Password' />
+                <p>{errors.password}</p>
+                <button type='submit'>Submit</button>
+              </Form>
+            )}
           </Formik>
           </SignUpForm>
         </SignUpWrapForm>

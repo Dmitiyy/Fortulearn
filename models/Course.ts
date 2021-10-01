@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import mongoose, {Schema, model} from 'mongoose';
 
 const courseSchema = new Schema({
   photo: {
@@ -43,3 +43,5 @@ const courseSchema = new Schema({
 });
 
 const Course = model('Course', courseSchema);
+
+export default mongoose.models.Course || Course;

@@ -29,6 +29,7 @@ export const FooterContainer = styled.div`
   }
   ul {
     list-style: none;
+    margin-left: 100px;
   }
   li {
     color: white;
@@ -49,6 +50,7 @@ export const FooterContainer = styled.div`
     align-items: center;
     ul {
       margin-top: 40px;
+      margin-left: 0px;
       width: 153px;
     }
   }

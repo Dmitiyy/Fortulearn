@@ -56,6 +56,11 @@ export const SignUpForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    p {
+      color: #db3939;
+      font-size: 18px;
+      margin-top: 5px;
+    }
     input {
       border: none;
       padding-left: 20px;
