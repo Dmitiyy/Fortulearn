@@ -90,6 +90,23 @@ export const SignUpForm = styled.div`
       font-size: 20px;
       font-weight: bold;
       cursor: pointer;
+      &:disabled {
+        opacity: 0.5;
+      }
     }
   }
+`;
+
+export const SignUpErrorModule = styled.div`
+  width: 100%;
+  height: 45px;
+  background: #D96363;
+  /* border-radius: 13px; */
+  margin: 0 auto;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 20px;
 `;

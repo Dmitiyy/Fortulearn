@@ -21,8 +21,8 @@ export default async function handler(
     try {
       await connectToDatabase();
       
-      const {name, email, password, type} = req.body;
-
+      const {name, email, password, type} = req.body; 
+      
       let user: any = {};
       let token: string = '';
 
@@ -37,7 +37,12 @@ export default async function handler(
 
       res.status(201).json({status: 'success', body: {user, token}});
     } catch (err) {
-      const {message}: any = err;
+      let {message}: any = err;
+
+      if (message.search(/duplicate key error collection/i)) {
+        message = 'User with this email already exists';
+      }
+
       res.status(500).json({status: 'fail', body: message})
     };
   }

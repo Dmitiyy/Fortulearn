@@ -7,3 +7,10 @@ export const signUpAction = (data: ISendData) => {
     payload: data
   }
 }
+
+export const defaultAction = (data: any, name: string) => {
+  return {
+    type: Actions.DefAction,
+    payload: {data, ini: name}
+  }
+}
