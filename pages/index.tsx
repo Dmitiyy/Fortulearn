@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <Fragment>
-      <Nav background={true} logo={Logo} />
+      <Nav background={true} logo={Logo} user={false} />
       <Header />
       <About />
       <You />

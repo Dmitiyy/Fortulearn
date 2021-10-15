@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import mongoose from 'mongoose';
 import connectToDatabase from '../../utils/connectToDatabase';
 import bcrypt from 'bcrypt';
 import { getNewToken } from './signup';
@@ -30,7 +29,7 @@ export default async function handler(
       }
 
       const token = getNewToken(user._id);
-      res.status(200).json({status: 'success', data: user, token});
+      res.status(200).json({status: 'success', body: {user, token}});
     } catch (err) {
       const {message}: any = err;
       res.status(500).json({status: 'fail', data: message});

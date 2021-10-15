@@ -7,27 +7,32 @@ interface IData {
   title: string;
   photo: StaticImageData;
   id: string;
+  value: string
 }
 
 export const categoriesData: Array<IData> = [
   {
     title: 'Business',
     photo: Business,
-    id: 'id' + Math.random().toString(16).slice(2)
+    id: 'id' + Math.random().toString(16).slice(2),
+    value: 'business'
   },
   {
     title: 'Development',
     photo: Development,
-    id: 'id' + Math.random().toString(16).slice(2)
+    id: 'id' + Math.random().toString(16).slice(2),
+    value: 'development'
   },
   {
     title: 'Finance',
     photo: Finance,
-    id: 'id' + Math.random().toString(16).slice(2)
+    id: 'id' + Math.random().toString(16).slice(2),
+    value: 'finance'
   },
   {
     title: 'Music',
     photo: Music,
-    id: 'id' + Math.random().toString(16).slice(2)
+    id: 'id' + Math.random().toString(16).slice(2),
+    value: 'music'
   },
 ];

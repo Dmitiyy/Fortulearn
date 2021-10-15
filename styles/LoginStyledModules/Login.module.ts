@@ -27,6 +27,11 @@ export const LoginForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    p {
+      color: #db3939;
+      font-size: 18px;
+      margin-top: 5px;
+    }
     input {
       border: none;
       padding-left: 20px;
@@ -56,6 +61,23 @@ export const LoginForm = styled.div`
       font-size: 20px;
       font-weight: bold;
       cursor: pointer;
+      &:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
     }
   }
+`;
+
+export const LogInErrorModule = styled.div`
+  width: 100%;
+  height: 45px;
+  background: #D96363;
+  margin: 0 auto;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 20px;
 `;

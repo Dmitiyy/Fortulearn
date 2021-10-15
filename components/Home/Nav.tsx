@@ -11,15 +11,16 @@ import {
   NavWrapText 
 } from '../../styles/HomeStyledModules/HomeNav.module';
 import { AnimatedButton } from '../AnimatedButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 interface INavProps {
   logo: StaticImageData
-  background: Boolean
+  background: Boolean,
+  user: any
 }
 
-export const Nav = ({logo, background}: INavProps) => {
+export const Nav = ({logo, background, user}: INavProps) => {
   const [openMenu, setOpenMenu] = useState<Boolean>(false);
 
   const openBurgerMenu = () => setOpenMenu(!openMenu);

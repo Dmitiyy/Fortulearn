@@ -92,6 +92,7 @@ export const SignUpForm = styled.div`
       cursor: pointer;
       &:disabled {
         opacity: 0.5;
+        cursor: default;
       }
     }
   }
@@ -101,7 +102,6 @@ export const SignUpErrorModule = styled.div`
   width: 100%;
   height: 45px;
   background: #D96363;
-  /* border-radius: 13px; */
   margin: 0 auto;
   color: #000;
   display: flex;

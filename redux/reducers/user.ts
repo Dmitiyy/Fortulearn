@@ -15,7 +15,9 @@ export type TState = {
     selectedCourses?: Array<any>
     type?: string
     _id?: string
-  }
+  },
+  loginError: Boolean;
+  loginLoading: Boolean;
 };
 
 export interface IAction {
@@ -27,7 +29,9 @@ const initialState: TState = {
   signupError: false,
   signupLoading: false,
   token: '',
-  user: {}
+  user: {},
+  loginError: false,
+  loginLoading: false,
 };
 
 export const userReducer = (state = initialState, action: IAction): TState => {

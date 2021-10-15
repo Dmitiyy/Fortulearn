@@ -12,3 +12,9 @@ dispatch({type: Actions.Click, payload: {}});
   width="200px"
   height="60px"
 />
+
+Pagination:
+const response = await Course.find({type: req.body.type})
+  .limit(req.body.limit)
+  .skip((req.body.page - 1) * req.body.limit)
+  .sort({createdAt: 'desc'});
