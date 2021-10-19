@@ -11,18 +11,18 @@ export default async function handler(
 
   if (req.method === 'POST') {
     try {
-      const {type, limit, page} = req.body;
+      const {type, limit, page, filter} = req.body;
 
       if (!limit || !type || !page) {
         return res.status(400).json({status: 'fail', data: 'Bad request'});
       }
 
-      const response = await Course.find({type: req.body.type})
-      .limit(req.body.limit)
-      .skip((req.body.page - 1) * req.body.limit)
+      const response = await Course.find({type: type, name: new RegExp(filter, 'i')})
+      .limit(limit)
+      .skip((page - 1) * limit)
       .sort({createdAt: 'desc'});
-
-      const pages = await Course.find({type: req.body.type}).countDocuments();
+      
+      const pages = await Course.find({type: type, name: new RegExp(filter, 'i')}).countDocuments();
     
       res.json({status: 'success', data: {response, pages: Math.ceil(pages / limit)}});
 

@@ -7,6 +7,7 @@ import { Nav } from "../../components/Home/Nav";
 import Logo from '../../images/logo_courses.png';
 import getUser from "../../utils/getUser";
 import cookie from 'cookie';
+import axios from "axios";
 
 export default function Courses({user}: any) {
   const footerParams: IFooter = {

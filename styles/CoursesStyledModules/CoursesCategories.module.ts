@@ -91,6 +91,9 @@ export const CategoriesCourseContent = styled.div`
   opacity: 0;
   transition: all 0.3s;
   p {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
     margin-bottom: 30px;
   }
 `;
@@ -185,4 +188,29 @@ export const CategoriesWrapCourses = styled.div`
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 20px;
   margin-top: 50px;
+`;
+
+export const CategoriesLoading = styled.div`
+  width: 100%;
+  height: calc(100% - 50px);
+  background: #fdfdfd7a;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const CoursesError = styled.p`
+  margin-top: 50px;
+  font-weight: bold;
+  font-size: 20px;
+`;
+
+export const CoursesSearchBlock = styled.div`
+  width: 100%;
+  height: auto;
 `;

@@ -1,11 +1,6 @@
 import {useState} from 'react';
 import axios from 'axios';
-
-interface ICategories {
-  type: string;
-  page: number;
-  limit?: number;
-}
+import { checkTheNameOfItem } from './checkName';
 
 type TData = [
   data: [], 
@@ -22,15 +17,19 @@ export default function useCategoriesData(): TData {
   const [pages, setPages] = useState<number[]>([]);
   let pagesArray: Array<number> = [];
 
-  const getCategoriesData = async (type: string, page: number, limit = 10) => {
+  const getCategoriesData = async (type: string, page: number, filter = '', limit = 16) => {
     try {
       setLoading(true);
       const result = await axios({
         method: 'POST',
         url: '/api/getCourses',
-        data: JSON.stringify({type, page, limit}),
+        data: JSON.stringify({type, page, limit, filter}),
         headers: {'Content-Type': 'application/json'}
       });
+      for (let i: number = 0; i < result.data.data.response.length; i++) {
+        let name = result.data.data.response[i].name; 
+        result.data.data.response[i].name = checkTheNameOfItem(name);
+      }
       setData(result.data.data.response);
       for (let i: number = 1; i <= result.data.data.pages; i++) {
         pagesArray.push(i);
