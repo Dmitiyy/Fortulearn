@@ -32,8 +32,8 @@ const renderModel = () => {
         default: []
       },
       schedule: {
-        type: Array,
-        default: []
+        type: Object,
+        default: {}
       },
       type: {
         type: String,

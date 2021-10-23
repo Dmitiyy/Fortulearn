@@ -16,6 +16,13 @@ export const logInAction = (data: IFormikValues) => {
   }
 }
 
+export const getCourseDetails = (id: string) => {
+  return {
+    type: Actions.CourseDetails,
+    payload: id
+  }
+}
+
 export const defaultAction = (data: any, name: string) => {
   return {
     type: Actions.DefAction,

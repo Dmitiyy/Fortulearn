@@ -18,6 +18,8 @@ export type TState = {
   },
   loginError: Boolean;
   loginLoading: Boolean;
+  currentCourse: [];
+  getCourseError: Boolean;
 };
 
 export interface IAction {
@@ -32,6 +34,8 @@ const initialState: TState = {
   user: {},
   loginError: false,
   loginLoading: false,
+  currentCourse: [],
+  getCourseError: false
 };
 
 export const userReducer = (state = initialState, action: IAction): TState => {

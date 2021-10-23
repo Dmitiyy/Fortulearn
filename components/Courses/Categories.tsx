@@ -1,5 +1,6 @@
 import Slider from "react-slick";
 import Image from "next/image";
+import Link from 'next/link';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { 
@@ -17,7 +18,6 @@ import {
   CategoriesWrapCourses,
   CategoriesLoading,
   CoursesError,
-  CoursesSearchBlock
 } from "../../styles/CoursesStyledModules/CoursesCategories.module";
 import SearchPhoto from '../../images/search_courses.png';
 import { categoriesData } from "./coursesDb";
@@ -145,16 +145,20 @@ const renderSliderComponent = (data: any) => {
             <CategoriesCourse key={item._id}>
               <CategoriesCourseContent>
                 <p>{item.name}</p>
-                <AnimatedButton 
-                  initialColor='#000'
-                  hoverColor='#fff'
-                  textColor='white'
-                  text='View more'
-                  textHover='#000'
-                  textSize="20px"
-                  width="160px"
-                  height="50px"
-                />
+                <Link href={{pathname: `/courses/${item._id}`}} passHref>
+                  <div>
+                    <AnimatedButton 
+                      initialColor='#000'
+                      hoverColor='#fff'
+                      textColor='white'
+                      text='View more'
+                      textHover='#000'
+                      textSize="20px"
+                      width="160px"
+                      height="50px"
+                    />
+                  </div>
+                </Link>
               </CategoriesCourseContent>
             </CategoriesCourse>
           )

@@ -37,6 +37,22 @@ function* logIn(action: IAction): any {
   yield registration(action, 'loginLoading', 'loginError', 'login');
 }
 
+function* courseDetails(action: IAction): any {
+  try {
+    const response = yield call(() => {
+      return axios({
+        method: 'POST',
+        url: '/api/getCertainCourse',
+        data: action.payload       
+      });
+    });
+    console.log(response);
+    yield put(defaultAction(false, 'getCourseError'));
+  } catch (err) {
+    yield put(defaultAction(true, 'getCourseError'));
+  }
+}
+
 function* signUpWatcher() {
   yield takeEvery(Actions.SignUp, signUp);
 }
@@ -45,6 +61,10 @@ function* logInWatcher() {
   yield takeEvery(Actions.LogIn, logIn);
 }
 
+function* courseDetailsWatcher() {
+  yield takeEvery(Actions.CourseDetails, courseDetails);
+}
+
 export function* rootSaga() {
-  yield all([signUpWatcher(), logInWatcher()]);
+  yield all([signUpWatcher(), logInWatcher(), courseDetailsWatcher()]);
 }

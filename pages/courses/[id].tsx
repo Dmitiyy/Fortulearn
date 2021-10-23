@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import Image from 'next/image';
+import { Fragment, useEffect } from "react";
 import { faDollarSign, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CourseFooter from "../../components/Courses/CourseFooter";
@@ -18,44 +17,80 @@ import {
   CoursesParticipantsItem,
   CoursesParticipantsInner,
   CoursesContentSchedule,
-  CoursesContentJoin
+  CoursesContentJoin,
+  CoursesContentImg
 } from '../../styles/CoursesStyledModules/CoursesContent.module';
-import Preview from '../../images/courses_content.png';
 import { AnimatedButton } from "../../components/AnimatedButton";
+import { GetServerSideProps } from "next";
+import axios from "axios";
+import { checkTheNameOfItem } from "../../utils/checkName";
 
-export default function Courses() {
+interface ICourse {
+  author: {photo: string, name: string, status: string, email: string};
+  createdAt: string;
+  description: string;
+  name: string;
+  participants: [number, number];
+  people: [];
+  photo: string;
+  price: number;
+  schedule: ICourseSchedule;
+  type: string;
+  _id: string;
+}
+
+interface ICourseSchedule {
+  sunday: string[];
+  monday: string[];
+  tuesday: string[];
+  wednesday: string[];
+  thursday: string[];
+  friday: string[];
+  saturday: string[];
+}
+
+type TProps = {
+  course: ICourse
+}
+
+export default function Courses({course}: TProps) {
+  const {
+    sunday,
+    monday, 
+    tuesday, 
+    wednesday,
+    thursday,
+    friday, 
+    saturday 
+  } = course.schedule;
+
   return (
     <Fragment>
       <CourseNav />
       <CoursesContentBlock>
         <CoursesContentPhoto>
-          <Image src={Preview} alt='preview' />
+          <CoursesContentImg photo={course.photo} />
           <CoursesContentWrap>
-            <div><FontAwesomeIcon icon={faUserFriends} size='2x' /><p>2-6</p></div>
-            <div><FontAwesomeIcon icon={faDollarSign} size='2x' /><p>7</p></div>
+            <div><FontAwesomeIcon icon={faUserFriends} size='2x' /><p>
+              {course.participants[0]}-{course.participants[1]}
+            </p></div>
+            <div><FontAwesomeIcon icon={faDollarSign} size='2x' /><p>
+              {course.price}
+            </p></div>
           </CoursesContentWrap>
         </CoursesContentPhoto>
         <CoursesContentText>
-          <h2>Course name here</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum
-          </p>
+          <h2>{course.name}</h2>
+          <p>{course.description}</p>
         </CoursesContentText>
       </CoursesContentBlock>
       <CoursesContentAuthor>
         <h2>Author</h2>
         <CoursesAuthorWrap>
           <CoursesAuthorImgWrap>
-            <CoursesAuthorPhoto />
+            <CoursesAuthorPhoto photo={course.author.photo} />
             <div className='courses__author-photo'>
-              <h2>Philipp Wüthrich</h2><p>Web designer</p>
+              <h2>{course.author.name}</h2><p>{course.author.status}</p>
             </div>
           </CoursesAuthorImgWrap>
           <AnimatedButton 
@@ -73,41 +108,17 @@ export default function Courses() {
       <CoursesContentParticipants>
         <h2>Participants</h2>
         <CoursesParticipantsWrap>
-          <CoursesParticipantsItem>
-            <CoursesParticipantsInner>
-              <h3>Karl Fredrickson</h3>
-            </CoursesParticipantsInner>
-          </CoursesParticipantsItem>
-          <CoursesParticipantsItem>
-            <CoursesParticipantsInner>
-              <h3>Karl Fredrickson</h3>
-            </CoursesParticipantsInner>
-          </CoursesParticipantsItem>
-          <CoursesParticipantsItem>
-            <CoursesParticipantsInner>
-              <h3>Karl Fredrickson</h3>
-            </CoursesParticipantsInner>
-          </CoursesParticipantsItem>
-          <CoursesParticipantsItem>
-            <CoursesParticipantsInner>
-              <h3>Karl Fredrickson</h3>
-            </CoursesParticipantsInner>
-          </CoursesParticipantsItem>
-          <CoursesParticipantsItem>
-            <CoursesParticipantsInner>
-              <h3>Karl Fredrickson</h3>
-            </CoursesParticipantsInner>
-          </CoursesParticipantsItem>
-          <CoursesParticipantsItem>
-            <CoursesParticipantsInner>
-              <h3>Karl Fredrickson</h3>
-            </CoursesParticipantsInner>
-          </CoursesParticipantsItem>
-          <CoursesParticipantsItem>
-            <CoursesParticipantsInner>
-              <h3>Karl Fredrickson</h3>
-            </CoursesParticipantsInner>
-          </CoursesParticipantsItem>
+          {
+            course.people.map((item: any, i) => {
+              return (
+                <CoursesParticipantsItem photo={item.photo} key={i}>
+                  <CoursesParticipantsInner>
+                    <h3>{checkTheNameOfItem(item.name)}</h3>
+                  </CoursesParticipantsInner>
+                </CoursesParticipantsItem>
+              )
+            })
+          }
         </CoursesParticipantsWrap>
       </CoursesContentParticipants>
       <CoursesContentSchedule>
@@ -125,24 +136,7 @@ export default function Courses() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>9am</td>
-              <td>5pm</td>
-              <td>8pm</td>
-              <td>9am</td>
-              <td>5pm</td>
-              <td>8pm</td>
-              <td>9am</td>
-            </tr>
-            <tr>
-              <td>9am</td>
-              <td>5pm</td>
-              <td>8pm</td>
-              <td>9am</td>
-              <td>5pm</td>
-              <td>8pm</td>
-              <td>9am</td>
-            </tr>
+            {renderTable([sunday, monday, tuesday, wednesday, thursday, friday, saturday])}
           </tbody>
         </table>
       </CoursesContentSchedule>
@@ -162,4 +156,52 @@ export default function Courses() {
       <CourseFooter />
     </Fragment>
   )
+}
+
+const renderTable = (data: any[]) => {
+  let maxLength: number = 0;
+  const lengthData: number[] = [];
+
+  for(let i: number = 0; i < data.length; i++) {
+    if (data[i].length > maxLength) {
+      maxLength = data[i].length;
+    }
+  }
+
+  for (let i: number = 0; i < maxLength; i++) {
+    lengthData.push(i);
+  }
+
+  return (
+    lengthData.map((item: number) => {
+      return (
+        <tr key={item}>
+          {
+            data.map((_, i) => {
+              return (
+                <td key={i}>{!data[i][item] ? '⚊' : data[i][item]}</td>
+              )
+            })
+          }
+        </tr>
+      )
+    })
+  )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const response = await axios({
+    method: 'POST',
+    url: 'http://localhost:3000/api/getCertainCourse',
+    headers: {
+      'Content-Type': 'application/json'
+    },       
+    data: JSON.stringify({id: context.query.id}),
+  });
+  
+  return {
+    props: {
+      course: response.data.data[0]
+    }
+  };
 }

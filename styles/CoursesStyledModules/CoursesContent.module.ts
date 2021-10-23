@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import AuthorPhoto from '../../images/courses_author.png';
-import Participant from '../../images/participant.png';
+
+interface IContentPhoto {
+  photo: string
+}
 
 export const CoursesContentBlock = styled.div`
   width: 1300px;
@@ -16,6 +18,16 @@ export const CoursesContentPhoto = styled.div`
     width: 100% !important;
     border-radius: 13px;
   }
+`;
+
+export const CoursesContentImg = styled.div<IContentPhoto>`
+  width: 100%;
+  height: 230px;
+  border-radius: 13px;
+  background-image: url(${(props) => props.photo});
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export const CoursesContentText = styled.div`
@@ -50,10 +62,10 @@ export const CoursesContentWrap = styled.div`
   }
 `;
 
-export const CoursesAuthorPhoto = styled.div`
+export const CoursesAuthorPhoto = styled.div<{photo: string}>`
   width: 160px;
   height: 200px;
-  background-image: url(${AuthorPhoto.src});
+  background-image: url(${props => props.photo});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -106,10 +118,10 @@ export const CoursesParticipantsWrap = styled.div`
   margin-top: 30px;
 `;
 
-export const CoursesParticipantsItem = styled.div`
+export const CoursesParticipantsItem = styled.div<{photo: string}>`
   width: 180px;
   height: 180px;
-  background: url(${Participant.src});
+  background: url(${(props) => props.photo});
   border-radius: 13px;
   background-position: center;
   background-repeat: no-repeat;
@@ -119,7 +131,7 @@ export const CoursesParticipantsItem = styled.div`
 `;
 
 export const CoursesParticipantsInner = styled.div`
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  background: linear-gradient(200deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,7 +139,7 @@ export const CoursesParticipantsInner = styled.div`
   height: 50px;
   border-radius: 13px;
   h3 {
-    opacity: 0.5;
+    opacity: 0.6;
     color: #fff;
   }
 `;

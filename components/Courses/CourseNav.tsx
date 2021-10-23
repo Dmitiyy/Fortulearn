@@ -12,7 +12,13 @@ import { useState } from 'react';
 export default function CourseNav({user}: any) {
   const [openSettings, setOpenSettings] = useState<Boolean>(false);
 
-  const triggerSettings = (): void => {setOpenSettings(!openSettings)};
+  const triggerSettings = (): void => {
+    if (user) {
+      setOpenSettings(!openSettings)
+    } else {
+      setOpenSettings(false);
+    }
+  };
 
   return (
     <CoursesNavBlock>
@@ -27,7 +33,9 @@ export default function CourseNav({user}: any) {
               <Image src={Arrow} alt='arrow' />
             </>
           ) : (
-            <p>Please log in</p>
+            <Link href='/login' passHref>
+              <p>Please log in</p>
+            </Link>
           )
         }
       </CoursesNavWrap>

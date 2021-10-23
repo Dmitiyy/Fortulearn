@@ -3,5 +3,6 @@ export enum Actions {
   SignUpError = 'SIGNUP_ERROR',
   SignUpLoading = 'SIGNUP_LOADING',
   DefAction = 'DEFAULT_ACTION',
-  LogIn = 'LOGIN'
+  LogIn = 'LOGIN',
+  CourseDetails = 'COURSE_DETAILS'
 }
