@@ -1,14 +1,14 @@
+import { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import {all, takeEvery, call, put} from 'redux-saga/effects';
 import { Actions } from './actions/tActions';
-import { defaultAction } from './actions/user';
-import { IAction } from './reducers/user';
+import { setDataDefault } from './reducers/user';
 
 function* registration(
-  action: IAction, loading: string, error: string, request: string
+  action: PayloadAction, loading: string, error: string, request: string
 ): any {
   try {
-    yield put(defaultAction(true, loading));
+    yield put(setDataDefault({ini: loading, data: true}));
 
     const response = yield call(() => {
       return axios({
@@ -18,26 +18,26 @@ function* registration(
       });
     });
 
-    yield put(defaultAction(response.data.body.user, 'user'));
-    yield put(defaultAction(response.data.body.token, 'token'));
+    yield put(setDataDefault({ini: 'user', data: response.data.body.user}));
+    yield put(setDataDefault({ini: 'token', data: response.data.body.token}));
 
-    yield put(defaultAction(false, error));
-    yield put(defaultAction(false, loading));
+    yield put(setDataDefault({ini: error, data: false}));
+    yield put(setDataDefault({ini: loading, data: false}));
   } catch (err: any) {
-    yield put(defaultAction(true, error));
-    yield put(defaultAction(false, loading));
+    yield put(setDataDefault({ini: error, data: true}));
+    yield put(setDataDefault({ini: loading, data: false}));
   };
 }
 
-function* signUp(action: IAction): any {
+function* signUp(action: PayloadAction): any {
   yield registration(action, 'signupLoading', 'signupError', 'signup');
 }
 
-function* logIn(action: IAction): any {
+function* logIn(action: PayloadAction): any {
   yield registration(action, 'loginLoading', 'loginError', 'login');
 }
 
-function* courseDetails(action: IAction): any {
+function* courseDetails(action: PayloadAction): any {
   try {
     const response = yield call(() => {
       return axios({
@@ -47,9 +47,9 @@ function* courseDetails(action: IAction): any {
       });
     });
     console.log(response);
-    yield put(defaultAction(false, 'getCourseError'));
+    yield put(setDataDefault({ini: 'getCourseError', data: false}));
   } catch (err) {
-    yield put(defaultAction(true, 'getCourseError'));
+    yield put(setDataDefault({ini: 'getCourseError', data: true}));
   }
 }
 

@@ -24,6 +24,12 @@ import { AnimatedButton } from "../../components/AnimatedButton";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import { checkTheNameOfItem } from "../../utils/checkName";
+import { useDispatch } from "react-redux";
+import { defaultAction } from "../../redux/actions/user";
+import getUser from "../../utils/getUser";
+import {parseCookies} from './index';
+import { AppDispatch } from "../../redux/store";
+import { setDataDefault } from "../../redux/reducers/user";
 
 interface ICourse {
   author: {photo: string, name: string, status: string, email: string};
@@ -50,10 +56,12 @@ interface ICourseSchedule {
 }
 
 type TProps = {
-  course: ICourse
+  course: ICourse;
+  teacher: any;
+  user: any;
 }
 
-export default function Courses({course}: TProps) {
+export default function Courses({course, teacher, user}: TProps) {
   const {
     sunday,
     monday, 
@@ -63,10 +71,15 @@ export default function Courses({course}: TProps) {
     friday, 
     saturday 
   } = course.schedule;
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(setDataDefault({ini: 'author', data: teacher}));
+  }, [teacher, dispatch]);
 
   return (
     <Fragment>
-      <CourseNav />
+      <CourseNav user={user} />
       <CoursesContentBlock>
         <CoursesContentPhoto>
           <CoursesContentImg photo={course.photo} />
@@ -198,10 +211,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },       
     data: JSON.stringify({id: context.query.id}),
   });
-  
+
+  const course = response.data.data.course[0];
+  const teacher = response.data.data.teacher[0];
+
+  const cookies = parseCookies(context.req);
+  const user = await getUser(cookies.token);
+
   return {
-    props: {
-      course: response.data.data[0]
-    }
+    props: {course, teacher, user}
   };
 }

@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useCookies } from 'react-cookie';
 import Router from 'next/router'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { 
   SignUpBtnPerson, 
   SignUpContainer, 
@@ -18,7 +18,7 @@ import TeacherWhite from '../images/icon_teacher_white.png';
 import TeacherBlack from '../images/icon_teacher_black.png';
 import { useEffect, useState } from 'react';
 import { signUpAction } from '../redux/actions/user';
-import {TState} from '../redux/reducers/user';
+import { AppDispatch, useAppSelector } from '../redux/store';
 
 interface IFormikValues {
   name: string;
@@ -40,7 +40,7 @@ export interface ISendData {
 }
 
 export default function SignUp() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const dataPerson: Array<string> = ['student', 'teacher'];
   const dataBtns: Array<IBtnValue> = [
     {defaultPhoto: StudentBlack, value: 'Student', activePhoto: StudentWhite},
@@ -48,9 +48,11 @@ export default function SignUp() {
   ];
   const [activePerson, setActivePerson] = useState<number>(0); 
   const [activeType, setActiveType] = useState<string>('Student');
-  const error = useSelector((state: TState) => state.signupError);
-  const loading: any = useSelector((state: TState) => state.signupLoading);
-  const token: string = useSelector((state: TState) => state.token);
+
+  const error = useAppSelector(state => state.user.signupError);
+  const loading: any = useAppSelector(state => state.user.signupLoading);
+  const token = useAppSelector(state => state.user.token);
+
   const [cookie, setCookie] = useCookies(['token']);
 
   useEffect(() => {

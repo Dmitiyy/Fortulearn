@@ -1,4 +1,4 @@
-import { Actions } from "../actions/tActions";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type TState = {
   signupError: Boolean;
@@ -20,14 +20,10 @@ export type TState = {
   loginLoading: Boolean;
   currentCourse: [];
   getCourseError: Boolean;
+  author: [];
 };
 
-export interface IAction {
-  type: string; 
-  payload: any;
-};
-
-const initialState: TState = {
+const initialState = {
   signupError: false,
   signupLoading: false,
   token: '',
@@ -35,14 +31,25 @@ const initialState: TState = {
   loginError: false,
   loginLoading: false,
   currentCourse: [],
-  getCourseError: false
-};
+  getCourseError: false,
+  author: []
+} as TState;
 
-export const userReducer = (state = initialState, action: IAction): TState => {
-  switch (action.type) {
-    case Actions.DefAction:
-      return {...state, [action.payload.ini]: action.payload.data};
-    default:
-      return {...state};
-  };
-};
+interface IDefaultPayload {
+  data: any;
+  ini: string;
+}
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    setDataDefault(state: any, action: PayloadAction<IDefaultPayload>) {
+      state[action.payload.ini] = action.payload.data;
+    }
+  }
+})
+
+const {actions, reducer} = userSlice;
+export default reducer;
+export const {setDataDefault} = actions;

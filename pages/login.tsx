@@ -1,5 +1,5 @@
 import { Formik, Field, Form } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import Router from 'next/router';
 import {  
@@ -8,10 +8,10 @@ import {
   LoginForm,
   LogInErrorModule
 } from "../styles/LoginStyledModules/Login.module";
-import {TState} from '../redux/reducers/user';
 import { logInAction } from '../redux/actions/user';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { AppDispatch, useAppSelector } from '../redux/store';
 
 export interface IFormikValues {
   email: string;
@@ -24,10 +24,11 @@ export default function Login() {
     password: Yup.string().min(8, 'Must be greater than 8').required('Enter your password')
   });
 
-  const error = useSelector((state: TState) => state.loginError);
-  const loading: any = useSelector((state: TState) => state.loginLoading);
-  const token: string = useSelector((state: TState) => state.token);
-  const dispatch = useDispatch();
+  const error = useAppSelector(state => state.user.loginError);
+  const loading: any = useAppSelector(state => state.user.loginLoading);
+  const token = useAppSelector(state => state.user.token);
+
+  const dispatch = useDispatch<AppDispatch>();
   const [cookie, setCookie] = useCookies(['token']);
 
   useEffect(() => {
