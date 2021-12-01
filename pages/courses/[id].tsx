@@ -25,11 +25,11 @@ import { GetServerSideProps } from "next";
 import axios from "axios";
 import { checkTheNameOfItem } from "../../utils/checkName";
 import { useDispatch } from "react-redux";
-import { defaultAction } from "../../redux/actions/user";
 import getUser from "../../utils/getUser";
 import {parseCookies} from './index';
 import { AppDispatch } from "../../redux/store";
 import { setDataDefault } from "../../redux/reducers/user";
+import Link from "next/link";
 
 interface ICourse {
   author: {photo: string, name: string, status: string, email: string};
@@ -75,6 +75,7 @@ export default function Courses({course, teacher, user}: TProps) {
 
   useEffect(() => {
     dispatch(setDataDefault({ini: 'author', data: teacher}));
+    console.log(teacher);
   }, [teacher, dispatch]);
 
   return (
@@ -106,16 +107,20 @@ export default function Courses({course, teacher, user}: TProps) {
               <h2>{course.author.name}</h2><p>{course.author.status}</p>
             </div>
           </CoursesAuthorImgWrap>
-          <AnimatedButton 
-            initialColor='#6FC3F7'
-            hoverColor='#fff'
-            textColor='black'
-            text='See more'
-            textHover='#000'
-            textSize="20px"
-            width="180px"
-            height="50px"
-          />
+          <Link href={`/teacher/${teacher._id}`} passHref>
+            <a>
+              <AnimatedButton 
+                initialColor='#6FC3F7'
+                hoverColor='#fff'
+                textColor='black'
+                text='See more'
+                textHover='#000'
+                textSize="20px"
+                width="180px"
+                height="50px"
+              />
+            </a>
+          </Link>
         </CoursesAuthorWrap>
       </CoursesContentAuthor>
       <CoursesContentParticipants>

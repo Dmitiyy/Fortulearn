@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FooterBlock, FooterContainer } from "../../styles/HomeStyledModules/HomeFooter.module"
 import Logo from '../../images/logoFooter.png'
 
 export interface IFooter {
@@ -11,8 +10,8 @@ export interface IFooter {
 
 export const Footer = ({about, you, questions}: IFooter) => {
   return (
-    <FooterBlock>
-      <FooterContainer>
+    <footer className="footer">
+      <div className='footer__container'>
         <div>
           <Image src={Logo} alt='logo_footer' />
         </div>
@@ -33,7 +32,7 @@ export const Footer = ({about, you, questions}: IFooter) => {
           <li>@fortulearn</li>
           <li>@daptellum.dev</li>
         </ul> 
-      </FooterContainer>
-    </FooterBlock>
+      </div>
+    </footer>
   )
 }

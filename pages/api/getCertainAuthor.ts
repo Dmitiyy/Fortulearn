@@ -10,7 +10,11 @@ export default async function handler(
     try {
       await connectToDatabase();
 
-      const teacher = await Teacher.find({email: req.body.email});
+      const teacher = await Teacher.find({['_id']: req.body.id});
+
+      if (teacher.length === 0) {
+        res.status(404).json({status: 'fail', data: 'Teacher not found'});
+      }
 
       res.status(200).json({status: 'success', data: teacher});
     } catch (err) {

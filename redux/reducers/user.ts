@@ -1,21 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type TUser = {
+  accomplishments?: Array<any>
+  conferences?: number
+  email?: string
+  gifts?: Array<any>
+  name?: string
+  password?: string
+  photo?: string
+  selectedCourses?: Array<any>
+  type?: string
+  _id?: string
+  yourCourses?: Array<any>
+  description?: string
+  status?: string
+}
+
 export type TState = {
   signupError: Boolean;
   signupLoading: Boolean;
   token: string;
-  user: {
-    accomplishments?: Array<any>
-    conferences?: number
-    email?: string
-    gifts?: Array<any>
-    name?: string
-    password?: string
-    photo?: string
-    selectedCourses?: Array<any>
-    type?: string
-    _id?: string
-  },
+  user: TUser,
   loginError: Boolean;
   loginLoading: Boolean;
   currentCourse: [];

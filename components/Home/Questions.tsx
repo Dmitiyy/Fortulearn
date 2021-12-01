@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { QuestionsBlock, QuestionsContainer, QuestionsWrapDescription, QuestionsWrapItems } from "../../styles/HomeStyledModules/HomeQuestions.module"
 import { questionsDb } from "./questionsDb"
 
 export const Questions = () => {
@@ -8,11 +7,11 @@ export const Questions = () => {
   const openQuestion = (number: number) => setActiveQuestion(number);
 
   return (
-    <QuestionsBlock id='questions'>
+    <div className="questions" id='questions'>
       <h1>Questions</h1>
       <p>Frequently asked questions</p>
-      <QuestionsContainer>
-        <QuestionsWrapItems>
+      <div className="questions__container">
+        <ul className='questions__wrap-items'>
           {
             questionsDb.map((item, i) => {
               return (
@@ -25,11 +24,11 @@ export const Questions = () => {
               )
             })
           }
-        </QuestionsWrapItems>
-        <QuestionsWrapDescription>
+        </ul>
+        <div className='questions__wrap-descr'>
           <p>{questionsDb[activeQuestion].answer}</p>
-        </QuestionsWrapDescription>
-      </QuestionsContainer>
-    </QuestionsBlock>
+        </div>
+      </div>
+    </div>
   )
 }

@@ -53,7 +53,7 @@ export default function PersonalArea({user}: IPersonal) {
                       <p>
                         You don&apos;t have any selected courses
                       </p>
-                      <FontAwesomeIcon  icon={faFrown} size='2x' />
+                      <FontAwesomeIcon icon={faFrown} size='2x' />
                     </PersonalBlockEmpty>
                   )
                 }
@@ -68,7 +68,8 @@ export default function PersonalArea({user}: IPersonal) {
         <PersonalFeatures>
           <div>
             <h2>Progress</h2>
-            <div />
+            <div>
+            </div>
           </div>
           <div>
             <h2>Accomplishments</h2>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CoursesFooterBlock = styled.div`
-  width: 1300px;
+  width: 1015px;
   height: 80px;
   background: linear-gradient(90deg, #6EC1F6 0%, #1B1AA6 100%);
   border-radius: 13px;

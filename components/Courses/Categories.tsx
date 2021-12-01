@@ -3,22 +3,6 @@ import Image from "next/image";
 import Link from 'next/link';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { 
-  CategoriesBlock, 
-  CategoriesBlockTitle, 
-  CategoriesCourse, 
-  CategoriesCourseContent, 
-  CategoriesCourseWrap, 
-  CategoriesPug, 
-  CategoriesSliderLeftArrow, 
-  CategoriesSliderRightArrow, 
-  CategoriesSliderWrap, 
-  CategoriesWrap,
-  CategoriesPugItem,
-  CategoriesWrapCourses,
-  CategoriesLoading,
-  CoursesError,
-} from "../../styles/CoursesStyledModules/CoursesCategories.module";
 import SearchPhoto from '../../images/search_courses.png';
 import { categoriesData } from "./coursesDb";
 import React, { useEffect, useRef, useState } from "react";
@@ -57,15 +41,15 @@ export const Categories = () => {
 
   return (
     <React.Fragment>
-      <CategoriesBlock>
-        <CategoriesBlockTitle>
+      <div className="categories">
+        <div className="categories__title">
           <h2>Categories</h2>
           <div>
             <input type='text' name='search' onChange={(e) => setSearchedQuery(e.target.value)} />
             <div onClick={handleSearch}><Image src={SearchPhoto} alt='search' /></div>
           </div>
-        </CategoriesBlockTitle>
-        <CategoriesWrap>
+        </div>
+        <div className="categories__wrap">
           {
             categoriesData.map((item: any, i) => {
               return (
@@ -77,12 +61,12 @@ export const Categories = () => {
               )
             })
           }
-        </CategoriesWrap>
+        </div>
         {
           error ? (
-            <CoursesError>Error, please wait and try again in a few minutes</CoursesError>
+            <p className='categories-error'>Error, please wait and try again in a few minutes</p>
           ) : !loading && data.length === 0 ? (
-            <CoursesError>No courses found, try again</CoursesError>
+            <p className='categories-error'>No courses found, try again</p>
           ) : (
             <>
               <div style={{position: 'relative'}}>
@@ -98,40 +82,41 @@ export const Categories = () => {
                 }
                 {
                   data.length > 7 && data.length < 16 ? (
-                    <CategoriesWrapCourses>
+                    <div className='categories__wrapCourses'>
                       {renderSliderComponent(data.slice(8, data.length))}
-                    </CategoriesWrapCourses>
+                    </div>
                   ) : null
                 }
                 {
                   data.length < 8 ? (
-                    <CategoriesWrapCourses>
+                    <div className='categories__wrapCourses'>
                       {renderSliderComponent(data)}
-                    </CategoriesWrapCourses>  
+                    </div>  
                   ) : null
                 }
-                <CategoriesLoading style={{display: loading ? 'flex' : 'none'}}>
+                <div className='categories-loading' style={{display: loading ? 'flex' : 'none'}}>
                   <Image src={ImgLoading} alt='loading' />
-                </CategoriesLoading>
+                </div>
               </div>
-              <CategoriesPug>
+              <div className='categories__pug'>
                 {
                   pages.map((item, i) => {
                     return (
-                      <CategoriesPugItem 
+                      <div
                         key={i}
-                        className={i === activePage ? 'courses_categories-active' : ''}
+                        className={i === activePage ? 'categories__pug-item courses_categories-active' : 
+                        'categories__pug-item'}
                         onClick={() => onPageClick(item)}>
                         {item}
-                      </CategoriesPugItem>
+                      </div>
                     )
                   })
                 }
-              </CategoriesPug>
+              </div>
             </>
           )
         }
-      </CategoriesBlock>
+      </div>
     </React.Fragment>
   )
 }
@@ -142,29 +127,35 @@ const renderSliderComponent = (data: any) => {
       {
         data.map((item: any, i: any) => {
           return (
-            <CategoriesCourse key={item._id}>
-              <CategoriesCourseContent>
-                <p>{item.name}</p>
-                <Link href={{pathname: `/courses/${item._id}`}} passHref>
-                  <div>
-                    <AnimatedButton 
-                      initialColor='#000'
-                      hoverColor='#fff'
-                      textColor='white'
-                      text='View more'
-                      textHover='#000'
-                      textSize="20px"
-                      width="160px"
-                      height="50px"
-                    />
-                  </div>
-                </Link>
-              </CategoriesCourseContent>
-            </CategoriesCourse>
+            <CourseItem data={item} key={item._id} />
           )
         })
       }
     </>
+  )
+}
+
+export const CourseItem = ({data}: {data: {name: string; _id: string}}) => {
+  return (
+    <div className="categories__course" key={data._id}>
+      <div className='categories__course-content'>
+        <p>{data.name}</p>
+        <Link href={{pathname: `/courses/${data._id}`}} passHref>
+          <div>
+            <AnimatedButton 
+              initialColor='#000'
+              hoverColor='#fff'
+              textColor='white'
+              text='View more'
+              textHover='#000'
+              textSize="20px"
+              width="160px"
+              height="50px"
+            />
+          </div>
+        </Link>
+      </div>
+    </div>
   )
 }
 
@@ -182,21 +173,21 @@ const RenderSlider = ({data, from, to, initial}: IRedenderSlider) => {
   const sliderGoPrev = (): void => {sliderFunc.current?.slickPrev()};  
 
   return (
-    <CategoriesSliderWrap>
-      <CategoriesSliderLeftArrow onClick={() => sliderGoPrev()}>
+    <div className="categories__slider">
+      <div className="categories__slider-left" onClick={() => sliderGoPrev()}>
         <Image src={Arrow} alt='arrow' />
-      </CategoriesSliderLeftArrow>
+      </div>
       <Slider className='courses_slider' arrows={false} ref={sliderFunc}>
-        <CategoriesCourseWrap>
+        <div className="categories__course-wrap">
           {renderSliderComponent(data.slice(initial, from))}
-        </CategoriesCourseWrap>
-        <CategoriesCourseWrap>
-          {renderSliderComponent(data.slice(from, to))}
-        </CategoriesCourseWrap>
+        </div>
+        <div className="categories__course-wrap">
+        {renderSliderComponent(data.slice(from, to))}
+        </div>
       </Slider>
-      <CategoriesSliderRightArrow onClick={() => sliderGoNext()}>
+      <div className='categories__slider-right' onClick={() => sliderGoNext()}>
         <Image src={Arrow} alt='arrow' />
-      </CategoriesSliderRightArrow>
-    </CategoriesSliderWrap>
+      </div>
+    </div>
   )
 }
